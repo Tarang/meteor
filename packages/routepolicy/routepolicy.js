@@ -97,10 +97,12 @@ _.extend(RoutePolicyConstructor.prototype, {
     self.urlPrefixTypes[urlPrefix] = type;
   },
 
+  isRelativeUrl = function(url) {
+    return (url.charAt(0) === '/');
+  },
+
   classify: function (url) {
     var self = this;
-    if (url.charAt(0) !== '/')
-      throw new Error('url must be a relative URL: ' + url);
     var prefix = _.find(_.keys(self.urlPrefixTypes), function (_prefix) {
       return self.urlPrefixMatches(_prefix, url);
     });
